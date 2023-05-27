@@ -53,7 +53,7 @@
                                             {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
-                                            {{ __('Запомнить на этом устройстве?') }}
+                                            {{ __('Запомнить в этом браузере?') }}
                                         </label>
                                     </div>
                                 </div>
