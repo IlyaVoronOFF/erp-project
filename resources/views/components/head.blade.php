@@ -14,13 +14,15 @@
     <link rel="shortcut icon" type="image/png" href="favicon.ico" />
     <!-- Datatable -->
     <link href="{{ asset('assets/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/chartist.min.css') }}">
+    <link href="{{ asset('assets/css/chartist.min.css') }}"rel="stylesheet">
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <!-- Pick date -->
     <link href="{{ asset('assets/css/daterangepicker.css') }}" rel="stylesheet">
+    <!-- Pick color -->
+    <link href="{{ asset('assets/css/asColorPicker.min.css') }}" rel="stylesheet">
     <!-- Style css -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 

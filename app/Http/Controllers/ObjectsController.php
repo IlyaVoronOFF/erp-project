@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ObjectFilter;
 use App\Http\Requests\objectstore;
 use App\Http\Requests\objectsupdate;
 use App\Models\ObjectModel;
 use App\Models\ObjectParts;
 use App\Models\PartUser;
 use App\Models\Stage;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +21,10 @@ class ObjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ObjectFilter $filters)
     {
-        $objects = DB::table('objects')
+        //return $_GET;
+        $objects = ObjectModel::filter($filters)
             ->join('stages', 'objects.stage_id', '=', 'stages.id')
             ->select('objects.*', DB::raw('stages.short_name as stage_name'))
             ->get();
@@ -40,6 +43,10 @@ class ObjectsController extends Controller
             ->groupBy('object_id')
             ->get();
         //return $timeParts;
+
+        $statuses = DB::table('statuses')
+            ->select('statuses.*')
+            ->get();
 
         $events = collect([]);
         foreach ($parts as $i) {
@@ -60,7 +67,7 @@ class ObjectsController extends Controller
             });
         }
 
-        return view('pages.objects.index', ['objectsList' => $objects, 'partsUser' => $partsUser, 'timeParts' => $timeParts, 'setEvents' => $timeEvents]);
+        return view('pages.objects.index', ['objectsList' => $objects, 'partsUser' => $partsUser, 'timeParts' => $timeParts, 'setEvents' => $timeEvents, 'setStatuses' => $statuses]);
     }
 
     /**
@@ -123,8 +130,11 @@ class ObjectsController extends Controller
         $users = User::select(['id', 'fio'])
             ->orderBy('id', 'asc')
             ->get();
+        $statuses = Status::select(['id', 'name', 'color'])
+            ->orderBy('id', 'asc')
+            ->get();
 
-        return view('pages.objects.edit', ['objectId' => $object, 'stageList' => $stages, 'userList' => $users]);
+        return view('pages.objects.edit', ['objectId' => $object, 'stageList' => $stages, 'userList' => $users, 'statusesList' => $statuses]);
     }
 
     /**
@@ -136,7 +146,7 @@ class ObjectsController extends Controller
      */
     public function update(objectsupdate $request, ObjectModel $object)
     {
-        $data = $request->only(['id', 'title', 'code', 'daterange', 'user_id', 'stage_id', 'project_sum', 'plan_fot', 'address', 'description']);
+        $data = $request->only(['id', 'title', 'code', 'daterange', 'user_id', 'stage_id', 'project_sum', 'plan_fot', 'address', 'description', 'archive']);
         $status = $object->fill($data)->save();
 
         if ($status) {

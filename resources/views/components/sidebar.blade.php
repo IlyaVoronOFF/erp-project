@@ -47,6 +47,10 @@
                                   <a href="{{ route('pages.stages.index') }}"
                                       @if (request()->routeIs('pages.stages.*')) class="active mm-active" @endif>Стадии</a>
                               </li>
+                              <li @if (request()->routeIs('pages.statuses.*')) class="mm-active" @endif>
+                                  <a href="{{ route('pages.statuses.index') }}"
+                                      @if (request()->routeIs('pages.statuses.*')) class="active mm-active" @endif>Статусы</a>
+                              </li>
                               <li @if (request()->routeIs('pages.rules.*')) class="mm-active" @endif>
                                   <a href="{{ route('pages.rules.index') }}"
                                       @if (request()->routeIs('pages.rules.*')) class="active mm-active" @endif>Права
