@@ -9,7 +9,7 @@ env:
   SERVER_HOST: 31.31.196.161
   SERVER_USER: u2078477
   SERVER_PORT: 22
-  SERVER_PATH: /www/afb-erp.site
+  SERVER_PATH: www/afb-erp.site
 
 jobs:
   deploy:
