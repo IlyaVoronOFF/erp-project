@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Filters\QueryFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class ObjectModel extends Model
 {
     protected $table = 'objects';
-    protected $fillable = ['id', 'title', 'code', 'daterange', 'user_id', 'stage_id', 'project_sum', 'plan_fot', 'address', 'description'];
+    protected $fillable = ['id', 'title', 'code', 'daterange', 'user_id', 'stage_id', 'project_sum', 'plan_fot', 'address', 'description', 'archive'];
 
     public function user()
     {
@@ -22,5 +24,10 @@ class ObjectModel extends Model
     public function objectParts()
     {
         return $this->hasOne(ObjectParts::class);
+    }
+
+    public function scopeFilter(Builder $builder, QueryFilter $filter)
+    {
+        return $filter->apply($builder);
     }
 }

@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - developer
+
+env:
+  SERVER_HOST: 31.31.196.161
+  SERVER_USER: u2078477
+  SERVER_PORT: 22
+  SERVER_PATH: www/afb-erp.site
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USER }}
+          port: ${{ env.SERVER_PORT }}
+          key: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASSWORD }}
+          script: "cd ${{env.SERVER_PATH}} && ./.scripts/deploy.sh"

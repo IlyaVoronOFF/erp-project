@@ -2201,6 +2201,7 @@ progress {
 
 .table-responsive {
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     width: -webkit-fill-available;
 }
@@ -34535,7 +34536,6 @@ table#example3 tbody td>a :hover {
     align-items: baseline;
     justify-content: space-between;
     flex-direction: row;
-    width: 50%;
 }
 
 .filters-just {
@@ -37207,12 +37207,23 @@ table.dataTable.display tbody td {
     color: #999;
 }
 
-.filter-year {
+.filter-year form,
+.filter-year form>div {
     display: flex;
     flex-direction: row;
     align-items: inherit;
+    align-items: center;
 }
 
 .filter-year label {
     margin-right: 10px;
+}
+
+
+/* статусы в объектах */
+
+.status-btn {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
 }

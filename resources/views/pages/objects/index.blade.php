@@ -17,7 +17,35 @@
                         @else
                             <div></div>
                         @endif
-                        <div class="filters-table dataTables_wrapper filters-just"></div>
+                        <div class="filters-table dataTables_wrapper filters-just">
+                            <div class="filter-year">
+                                <form action="" method="get" id="filter-form">
+                                    <label>Статусы:</label>
+                                    <div style="width:600px;">
+                                        <select class="multi-select-placeholder js-states select2-hidden-accessible"
+                                            name="status_id[]" id="filter-status" multiple>
+                                            <option value="">Все</option>
+                                            @foreach ($setStatuses as $p)
+                                                <option name="status_id" style="background-color: {{ $p->color }}"
+                                                    value="{{ $p->id }}"
+                                                    @if (isset($_GET['status_id'])) @foreach ($_GET['status_id'] as $po)
+                                                   @if ($po == $p->id)
+                                                      selected @endif
+                                                    @endforeach
+                                            @endif
+                                            >{{ $p->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="btn-group btn-rounded me-2" style="margin-left: -100px;">
+                                            <button type="submit" class="btn btn-primary btn-sm sharp" alt="Применить"><i
+                                                    class="fas fa-check"></i></button>
+                                            <button id="select-del" type="button" class="btn btn-danger btn-sm sharp"
+                                                alt="Очистить"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         @include('inc.messages')
@@ -31,6 +59,7 @@
                                         <th>#</th>
                                         <th style="min-width: 100px">Шифр</th>
                                         <th style="min-width: 300px;text-align: left;">Наименование</th>
+                                        <th>Статус</th>
                                         <th>Дата начала</th>
                                         <th>Дата окончания</th>
                                         <th>Стадии</th>
@@ -55,6 +84,17 @@
                                                 <td style="text-align: left;">
                                                     <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
                                                         class="text-primary"><strong>{{ $i->title }}</strong></a>
+                                                </td>
+                                                <td style="min-width: 111px;">
+                                                    @foreach ($setStatuses as $s)
+                                                        @if ($i->archive == $s->id)
+                                                            <div class="status-btn"
+                                                                style="background-color:{{ $s->color }}!important">
+                                                                {{ $s->name }}</div>
+                                                        @elseif($i->archive == 0)
+                                                            {{ '-' }}
+                                                        @endif
+                                                    @endforeach
                                                 </td>
                                                 <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                 <td>{{ substr($i->daterange, 13, 23) }}</td>
@@ -115,6 +155,17 @@
                                                     <td style="text-align: left;">
                                                         <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
                                                             class="text-primary"><strong>{{ $i->title }}</strong></a>
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($setStatuses as $s)
+                                                            @if ($i->archive == $s->id)
+                                                                <div class="status-btn"
+                                                                    style="background-color:{{ $s->color }}!important">
+                                                                    {{ $s->name }}</div>
+                                                            @elseif($i->archive == 0)
+                                                                {{ '-' }}
+                                                            @endif
+                                                        @endforeach
                                                     </td>
                                                     <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                     <td>{{ substr($i->daterange, 13, 23) }}</td>
@@ -180,6 +231,17 @@
                                                             <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
                                                                 class="text-primary"><strong>{{ $i->title }}</strong></a>
                                                         </td>
+                                                        <td>
+                                                            @foreach ($setStatuses as $s)
+                                                                @if ($i->archive == $s->id)
+                                                                    <div class="status-btn"
+                                                                        style="background-color:{{ $s->color }}!important">
+                                                                        {{ $s->name }}</div>
+                                                                @elseif($i->archive == 0)
+                                                                    {{ '-' }}
+                                                                @endif
+                                                            @endforeach
+                                                        </td>
                                                         <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                         <td>{{ substr($i->daterange, 13, 23) }}</td>
                                                         <td>{{ $i->stage_name }}</td>
@@ -231,6 +293,8 @@
     <!-- dataTable -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatables.init.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2-init.js') }}"></script>
     <script>
         $(function() {
             $("#successMsg").delay(5000).slideUp(300);
@@ -239,5 +303,10 @@
     </script>
     <script>
         $('.filters-table').append($('#example3_length'), $('#example3_filter'));
+    </script>
+    <script>
+        $('#select-del').click(function() {
+            location.href = '/objects';
+        })
     </script>
 @endpush

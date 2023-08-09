@@ -32,7 +32,8 @@ class objectsupdate extends FormRequest
             'project_sum' => ['required', 'string', 'min:3', 'max:191'],
             'plan_fot' => ['required', 'string', 'min:3', 'max:191'],
             'address' => ['required', 'string', 'min:3', 'max:255'],
-            'description' => ['sometimes']
+            'description' => ['sometimes'],
+            'archive' => ['sometimes'],
         ];
     }
 }

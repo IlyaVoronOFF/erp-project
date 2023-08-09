@@ -11,6 +11,7 @@ use App\Http\Controllers\RulesController;
 use App\Http\Controllers\SpecialsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StatusesController;
 use Illuminate\Support\Facades\Auth;
 
 // Route::get('/demo', function () {
@@ -27,6 +28,7 @@ Route::group(['as' => 'pages.', 'middleware' => 'auth'], function () {
     Route::resource('clients', ClientsController::class)->middleware('admin');
     Route::resource('parts', PartsController::class)->middleware('admin');
     Route::resource('stages', StagesController::class)->middleware('admin');
+    Route::resource('statuses', StatusesController::class)->middleware('admin');
     Route::resource('rules', RulesController::class)->middleware('admin');
     Route::resource('speciality', SpecialsController::class)->middleware('admin');
 });
