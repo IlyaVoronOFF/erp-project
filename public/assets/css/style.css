@@ -37211,7 +37211,7 @@ table.dataTable.display tbody td {
 .filter-year form>div {
     display: flex;
     flex-direction: row;
-    align-items: inherit;
+    /* align-items: inherit; */
     align-items: center;
 }
 

@@ -1,6 +1,9 @@
 name: Deploy
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - developer
@@ -24,4 +27,5 @@ jobs:
           port: ${{ env.SERVER_PORT }}
           key: ${{ secrets.SSHKEY }}
           password: ${{ secrets.PASSWORD }}
+          passphrase: ${{secrets.PHRASE}}
           script: "cd ${{env.SERVER_PATH}} && ./.scripts/deploy.sh"
