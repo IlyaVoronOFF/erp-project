@@ -23,4 +23,5 @@ jobs:
           username: ${{ env.SERVER_USER }}
           port: ${{ env.SERVER_PORT }}
           key: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASSWORD }}
           script: "cd ${{env.SERVER_PATH}} && ./.scripts/deploy.sh"
