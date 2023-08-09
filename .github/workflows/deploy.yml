@@ -3,7 +3,7 @@ name: Deploy
 on:
   pull_request:
     branches:
-      - master
+      - developer
 
 env:
   SERVER_HOST: 31.31.196.161
