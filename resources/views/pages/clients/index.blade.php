@@ -34,7 +34,7 @@
                                 <tbody>
                                     @forelse ($clientsList as $i)
                                         <tr style="height:63.38px;">
-                                            <td>{{ $i->id }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td style="text-align: left;">{{ $i->name }}</td>
                                             <td>{{ $i->email }}</td>
                                             <td>{{ $i->phone }}</td>

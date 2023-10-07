@@ -148,7 +148,7 @@
                                     @if (auth()->user()->rule_id < 5)
                                         @forelse ($objPartsList as $i)
                                             <tr style="height:63.38px;">
-                                                <td>{{ $i->id }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td style="text-align: left;">
                                                     <a href="{{ route('pages.part-user.index', ['object' => $objectId->id, 'part' => $i->id]) }}"
                                                         class="text-primary"><strong>{{ $i->part }}</strong></a>
@@ -176,7 +176,7 @@
                                         @forelse ($objPartsList as $i)
                                             @if (auth()->user()->id == $i->user_id)
                                                 <tr style="height:63.38px;">
-                                                    <td>{{ $i->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td style="text-align: left;">
                                                         <a href="{{ route('pages.part-user.index', ['object' => $objectId->id, 'part' => $i->id]) }}"
                                                             class="text-primary"><strong>{{ $i->part }}</strong></a>
@@ -210,6 +210,6 @@
         });
     </script>
     <script>
-        $('.filters-table').append($('#example3_length'), $('#example3_filter'));
+        $('.filters-table').append($('#example3_length'), $('#example3_filter').attr('style', 'margin-left:80px;'));
     </script>
 @endpush

@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="text-not-empty"></div>
                 <p>Вы дейсвительно хотите удалить этот раздел?</p>
             </div>
             <div class="modal-footer">
@@ -19,10 +20,19 @@
 </div>
 @push('js')
     <script>
+        var partUser = @json($partUser);
+
         $(function() {
             $('.delete').on('click', function() {
                 var el_id = $(this).attr('rel');
 
+                $('.text-not-empty').text('');
+
+                partUser.forEach(e => {
+                    if (e.object_parts_id == el_id) {
+                        return $('.text-not-empty').text('Раздел не пустой!');
+                    }
+                });
                 $('.delete-check').on('click', function() {
                     //alert(el_id);
                     $.ajax({

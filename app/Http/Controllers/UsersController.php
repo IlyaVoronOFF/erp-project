@@ -69,9 +69,12 @@ class UsersController extends Controller
 
         $partArr = [];
 
-        foreach ($request->get('parts') as $part) {
-            $partArr[] = new UserParts(['user_id' => $user->fill(['id']), 'part_id' => $part]);
+        if (!empty($request->get('parts'))) {
+            foreach ($request->get('parts') as $part) {
+                $partArr[] = new UserParts(['user_id' => $user->fill(['id']), 'part_id' => $part]);
+            }
         }
+
         if (!empty($partArr)) {
             $user->parts()->saveMany($partArr);
         }
@@ -135,8 +138,10 @@ class UsersController extends Controller
 
         $partArr = [];
 
-        foreach ($request->get('parts') as $part) {
-            $partArr[] = new UserParts(['user_id' => $user->fill(['id']), 'part_id' => $part]);
+        if (!empty($request->get('parts'))) {
+            foreach ($request->get('parts') as $part) {
+                $partArr[] = new UserParts(['user_id' => $user->fill(['id']), 'part_id' => $part]);
+            }
         }
 
         if (!empty($partArr)) {

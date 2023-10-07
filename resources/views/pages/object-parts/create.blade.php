@@ -118,7 +118,7 @@
                                                     for="descriptionObject">Примечание</label>
                                                 <div class="col-lg-9">
                                                     <textarea class="form-control" id="descriptionObject" name="description" rows="5"
-                                                        placeholder="Комментарий к объекту..">{{ old('description') }}</textarea>
+                                                        placeholder="Комментарий к разделу..">{{ old('description') }}</textarea>
                                                 </div>
                                             </div>
                                             <input name="object_id" value="{{ $object_id }}" hidden>

@@ -24,10 +24,18 @@ class ObjectsController extends Controller
     public function index(ObjectFilter $filters)
     {
         //return $_GET;
-        $objects = ObjectModel::filter($filters)
-            ->join('stages', 'objects.stage_id', '=', 'stages.id')
-            ->select('objects.*', DB::raw('stages.short_name as stage_name'))
-            ->get();
+        if (isset($_GET['status_id'])) {
+            $objects = ObjectModel::filter($filters)
+                ->join('stages', 'objects.stage_id', '=', 'stages.id')
+                ->select('objects.*', DB::raw('stages.short_name as stage_name'))
+                ->get();
+        } else {
+            $objects = ObjectModel::filter($filters)
+                ->join('stages', 'objects.stage_id', '=', 'stages.id')
+                ->select('objects.*', DB::raw('stages.short_name as stage_name'))
+                ->where('archive', '>', 1)
+                ->get();
+        }
 
         $partsUser = ObjectParts::select('object_parts.*')
             ->where('object_parts.user_id', auth()->user()->id)
@@ -81,6 +89,7 @@ class ObjectsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
         $users = User::select(['id', 'fio'])
+            ->whereIn('rule_id', [3, 4])
             ->orderBy('id', 'asc')
             ->get();
 
@@ -128,6 +137,7 @@ class ObjectsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
         $users = User::select(['id', 'fio'])
+            ->whereIn('rule_id', [3, 4])
             ->orderBy('id', 'asc')
             ->get();
         $statuses = Status::select(['id', 'name', 'color'])

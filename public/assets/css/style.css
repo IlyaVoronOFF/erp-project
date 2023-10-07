@@ -37186,6 +37186,7 @@ table.dataTable.display tbody td {
 
 .filter-year {
     display: flex;
+    align-items: baseline;
 }
 
 .form-control-filter-year {
@@ -37226,4 +37227,15 @@ table.dataTable.display tbody td {
     color: white;
     padding: 10px;
     border-radius: 5px;
+}
+
+
+/* checkbox status */
+
+.arhive {
+    display: flex;
+}
+
+.arhive input {
+    margin-right: 10px;
 }

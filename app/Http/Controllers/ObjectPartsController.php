@@ -59,8 +59,11 @@ class ObjectPartsController extends Controller
             $progress = 0;
         }
 
+        $partUser = PartUser::select('part_user.object_parts_id')
+            ->get();
+
         return
-            view('pages.object-parts.index', ['objectId' => $objects[0], 'objPartsList' => $parts, 'progress' => $progress]);
+            view('pages.object-parts.index', ['objectId' => $objects[0], 'objPartsList' => $parts, 'progress' => $progress, 'partUser' => $partUser]);
     }
 
     /**
@@ -74,6 +77,7 @@ class ObjectPartsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
         $users = User::select(['id', 'fio'])
+            ->where('rule_id', '=', 5)
             ->orderBy('id', 'asc')
             ->get();
 
@@ -122,6 +126,7 @@ class ObjectPartsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
         $users = User::select(['id', 'fio'])
+            ->where('rule_id', '=', 5)
             ->orderBy('id', 'asc')
             ->get();
 

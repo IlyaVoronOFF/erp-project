@@ -143,7 +143,7 @@
                                         <div class="col-xl-12">
                                             <div class="mb-3 row">
                                                 <label class="col-lg-3 col-form-label" for="parts">Разделы
-                                                    <span class="text-danger">*</span>
+                                                    {{-- <span class="text-danger">*</span> --}}
                                                 </label>
                                                 <div class="col-lg-9">
                                                     <select
