@@ -30,7 +30,7 @@ class usersupdate extends FormRequest
             'password' => ['required', 'string', 'min:6', 'max:191'],
             'rule_id' => ['required', 'string', 'min:1', 'max:191'],
             'special_id' => ['required', 'string', 'min:1', 'max:191'],
-            'parts' => ['required', 'array', 'min:1', 'max:191'],
+            //'parts' => ['required', 'array', 'min:1', 'max:191'],
             'oklad' => ['required', 'string', 'min:3', 'max:191'],
         ];
     }

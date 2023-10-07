@@ -37,11 +37,18 @@
                                             <h5 class="card-intro-title">{{ $i->user }}</h5>
                                             </p>
                                             <p>Всего отработано часов:
-                                            <h5 class="card-intro-title">{{ $count . ' ч. из ' . $i->time . ' ч.' }}</h5>
+                                            <h5 class="card-intro-title"><span
+                                                    @if ($count > $i->time) class="badge badge-lg badge-danger"
+                                                    @else
+                                                        class="badge badge-lg badge-success" @endif>{{ $count }}</span>{{ ' из ' }}<span
+                                                    class="badge badge-lg badge-primary">{{ $i->time }}</span>
+                                            </h5>
                                             </p>
                                             <div class="">
                                                 <div id="external-events" class="my-3">
-                                                    <p>Примечание к разделу:<br>{{ '"' . $i->description . '"' }}</p>
+                                                    @if ($i->description)
+                                                        <p>Примечание к разделу:<br>{{ '"' . $i->description . '"' }}</p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         @empty
@@ -63,7 +70,7 @@
                 </div>
                 @if (auth()->user()->rule_id < 5)
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" style="align-items: end;">
                             <h4 class="card-intro-title ">Статистика отработанных часов за выбранный год по месяцам</h4>
                             <div class="filter-year">
                                 <label>Год:</label>

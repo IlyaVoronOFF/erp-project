@@ -37,7 +37,7 @@
                                 <tbody>
                                     @forelse ($usersList as $i)
                                         <tr style="height:63.38px;">
-                                            <td>{{ $i->id }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td style="text-align: left;">{{ $i->fio }}</td>
                                             <td>{{ $i->email }}</td>
                                             <td>{{ $i->phone }}</td>
@@ -46,12 +46,12 @@
                                             <td>
                                                 @forelse ($partsList as $p)
                                                     @if ($i->id == $p->user_id)
-                                                        {{ $p->partShort_name }}
+                                                        {{ $p->partShort_name . '-' }}
                                                     @endif
                                                 @empty
                                                 @endforelse
                                             </td>
-                                            <td>{{ number_format($i->oklad, 0, '', ' ') }} ₽</td>
+                                            <td>{{ number_format($i->oklad, 0, '', ' ') }}</td>
                                             <td>{{ $i->rule_name }}</td>
                                             <td>
                                                 <div class="d-flex">

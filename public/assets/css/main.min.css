@@ -692,8 +692,8 @@ a.fc-event:hover {
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-    background-color: rgba(255, 220, 40, .15);
-    background-color: var(--fc-today-bg-color, rgba(255, 220, 40, .15))
+    background-color: #9fc0ff40;
+    background-color: var(--fc-today-bg-color, rgba(99, 64, 255, 0.15))
 }
 
 .fc .fc-daygrid-day-frame {

@@ -20,8 +20,7 @@
                         <div class="filters-table dataTables_wrapper filters-just">
                             <div class="filter-year">
                                 <form action="" method="get" id="filter-form">
-                                    <label>Статусы:</label>
-                                    <div style="width:600px;">
+                                    <div style="margin-left:0px;min-width:300px;">
                                         <select class="multi-select-placeholder js-states select2-hidden-accessible"
                                             name="status_id[]" id="filter-status" multiple>
                                             <option value="">Все</option>
@@ -79,7 +78,7 @@
                                     @if (auth()->user()->rule_id < 3)
                                         @forelse ($objectsList as $i)
                                             <tr style="height:63.38px;">
-                                                <td>{{ $i->id }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $i->code }}</td>
                                                 <td style="text-align: left;">
                                                     <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
@@ -150,7 +149,7 @@
                                         @forelse ($objectsList as $i)
                                             @if (auth()->user()->id == $i->user_id)
                                                 <tr style="height:63.38px;">
-                                                    <td>{{ $i->id }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $i->code }}</td>
                                                     <td style="text-align: left;">
                                                         <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
@@ -225,7 +224,7 @@
                                             @forelse ($objectsList as $i)
                                                 @if ($o->object_id == $i->id)
                                                     <tr style="height:63.38px;">
-                                                        <td>{{ $i->id }}</td>
+                                                        <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $i->code }}</td>
                                                         <td style="text-align: left;">
                                                             <a href="{{ route('pages.object-parts.index', ['object' => $i->id]) }}"
@@ -303,6 +302,7 @@
     </script>
     <script>
         $('.filters-table').append($('#example3_length'), $('#example3_filter'));
+        $('.select2-search__field').attr('placeholder', 'Статусы...');
     </script>
     <script>
         $('#select-del').click(function() {

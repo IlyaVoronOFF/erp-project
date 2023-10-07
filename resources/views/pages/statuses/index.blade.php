@@ -31,7 +31,7 @@
                                 <tbody>
                                     @forelse ($statusesList as $i)
                                         <tr style="height:63.38px;">
-                                            <td>{{ $i->id }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td style="text-align: left;">{{ $i->name }}</td>
                                             <td>
                                                 <div class="d-flex">
@@ -42,13 +42,15 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="{{ route('pages.statuses.edit', ['status' => $i->id]) }}"
-                                                        class="btn btn-primary shadow btn-xs sharp me-1"><i
-                                                            class="fa fa-pencil-alt"></i></a>
-                                                    <a href="#exampleModalCenter"
-                                                        class="btn btn-danger shadow btn-xs sharp delete"
-                                                        rel="{{ $i->id }}" data-bs-toggle="modal"><i
-                                                            class="fa fa-trash"></i></a>
+                                                    @if ($i->id > 1)
+                                                        <a href="{{ route('pages.statuses.edit', ['status' => $i->id]) }}"
+                                                            class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                                class="fa fa-pencil-alt"></i></a>
+                                                        <a href="#exampleModalCenter"
+                                                            class="btn btn-danger shadow btn-xs sharp delete"
+                                                            rel="{{ $i->id }}" data-bs-toggle="modal"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>

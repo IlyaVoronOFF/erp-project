@@ -43,7 +43,7 @@
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
-    display: inline-block;
+    display: flex;
     overflow: hidden;
     padding-left: 8px;
     text-overflow: ellipsis;
@@ -344,7 +344,7 @@
 }
 
 .select2-container--default .select2-results>.select2-results__options {
-    max-height: 200px;
+    max-height: 400px;
     overflow-y: auto
 }
 

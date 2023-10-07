@@ -22,7 +22,7 @@
                             <table id="example3" class="display table table-hover" style="min-width: 845px">
                                 <thead>
                                     <tr class="table-primary">
-                                        <th style="max-width: 40px">#</th>
+                                        <th style="max-width: 40px">ID</th>
                                         <th style="text-align: left;">Наименование</th>
                                         <th style="max-width: 100px">Управление</th>
                                     </tr>
