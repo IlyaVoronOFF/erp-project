@@ -27,12 +27,14 @@ class ObjectsController extends Controller
         if (isset($_GET['status_id'])) {
             $objects = ObjectModel::filter($filters)
                 ->join('stages', 'objects.stage_id', '=', 'stages.id')
-                ->select('objects.*', DB::raw('stages.short_name as stage_name'))
+                ->join('users', 'objects.user_id', '=', 'users.id')
+                ->select('objects.*', DB::raw('stages.short_name as stage_name'), DB::raw('users.fio as fio'))
                 ->get();
         } else {
             $objects = ObjectModel::filter($filters)
                 ->join('stages', 'objects.stage_id', '=', 'stages.id')
-                ->select('objects.*', DB::raw('stages.short_name as stage_name'))
+                ->join('users', 'objects.user_id', '=', 'users.id')
+                ->select('objects.*', DB::raw('stages.short_name as stage_name'), DB::raw('users.fio as fio'))
                 ->where('archive', '>', 1)
                 ->get();
         }

@@ -59,12 +59,12 @@
                                         <th style="min-width: 100px">Шифр</th>
                                         <th style="min-width: 300px;text-align: left;">Наименование</th>
                                         <th>Статус</th>
+                                        <th>Рук. проекта</th>
                                         <th>Дата начала</th>
                                         <th>Дата окончания</th>
                                         <th>Стадии</th>
                                         @if (auth()->user()->rule_id < 5)
                                             <th>Стоимость проекта</th>
-                                            <th>Планируемая ФОТ (руб)</th>
                                         @endif
                                         {{-- <th>Выплач. ФОТ (руб)</th>
                                         <th>Выплач. ФОТ (%)</th> --}}
@@ -95,12 +95,11 @@
                                                         @endif
                                                     @endforeach
                                                 </td>
+                                                <td>{{ $i->fio }}</td>
                                                 <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                 <td>{{ substr($i->daterange, 13, 23) }}</td>
                                                 <td>{{ $i->stage_name }}</td>
                                                 <td><strong>{{ number_format($i->project_sum, 0, '', ' ') }} ₽</strong>
-                                                </td>
-                                                <td><strong>{{ number_format($i->plan_fot, 0, '', ' ') }} ₽</strong>
                                                 </td>
                                                 {{-- <td></td>
                                             <td><span class="badge badge-primary light">70%</span></td> --}}
@@ -166,13 +165,11 @@
                                                             @endif
                                                         @endforeach
                                                     </td>
+                                                    <td>{{ $i->fio }}</td>
                                                     <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                     <td>{{ substr($i->daterange, 13, 23) }}</td>
                                                     <td>{{ $i->stage_name }}</td>
                                                     <td><strong>{{ number_format($i->project_sum, 0, '', ' ') }}
-                                                            ₽</strong>
-                                                    </td>
-                                                    <td><strong>{{ number_format($i->plan_fot, 0, '', ' ') }}
                                                             ₽</strong>
                                                     </td>
                                                     {{-- <td></td>
@@ -241,6 +238,7 @@
                                                                 @endif
                                                             @endforeach
                                                         </td>
+                                                        <td>{{ $i->fio }}</td>
                                                         <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                         <td>{{ substr($i->daterange, 13, 23) }}</td>
                                                         <td>{{ $i->stage_name }}</td>
