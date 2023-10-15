@@ -58,7 +58,7 @@
                                                 <label class="col-lg-3 col-form-label" for="user">Исполнитель
                                                     <span class="text-danger">*</span>
                                                 </label>
-                                                <div class="col-lg-9">
+                                                <div id="usersSelect" class="col-lg-9">
                                                     <select class="default-select form-control wide mb-3" name="user_id"
                                                         id="user">
                                                         @if (old('user_id') == '')
@@ -142,4 +142,9 @@
     <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
     <!-- Pickdate init-->
     <script src="{{ asset('assets/js/bs-daterange-picker-init.js') }}"></script>
+    <script>
+        var usersParts = @json($usersParts);
+        var value = $('#parts').val();
+    </script>
+    <script src="{{ asset('assets/js/bindSelectUsersByParts.js') }}"></script>
 @endpush

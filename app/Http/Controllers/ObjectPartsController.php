@@ -9,6 +9,7 @@ use App\Models\ObjectParts;
 use App\Models\Part;
 use App\Models\PartUser;
 use App\Models\User;
+use App\Models\UserParts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -81,7 +82,17 @@ class ObjectPartsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        return view('pages.object-parts.create', ['partList' => $parts, 'userList' => $users, 'object_id' => $object]);
+        $usersId = [];
+
+        foreach ($users as $v) {
+            $usersId[] = $v->id;
+        }
+
+        $usersParts = UserParts::select(['user_id', 'part_id'])
+            ->whereIn('user_id', $usersId)
+            ->get();
+
+        return view('pages.object-parts.create', ['partList' => $parts, 'userList' => $users, 'object_id' => $object, 'usersParts' => $usersParts]);
     }
 
     /**
@@ -130,7 +141,17 @@ class ObjectPartsController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        return view('pages.object-parts.edit', ['partList' => $parts, 'userList' => $users, 'objectId' => $object_part]);
+        $usersId = [];
+
+        foreach ($users as $v) {
+            $usersId[] = $v->id;
+        }
+
+        $usersParts = UserParts::select(['user_id', 'part_id'])
+            ->whereIn('user_id', $usersId)
+            ->get();
+
+        return view('pages.object-parts.edit', ['partList' => $parts, 'userList' => $users, 'objectId' => $object_part, 'usersParts' => $usersParts]);
     }
 
     /**

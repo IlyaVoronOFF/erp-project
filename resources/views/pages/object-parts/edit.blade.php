@@ -59,7 +59,7 @@
                                                 <label class="col-lg-3 col-form-label" for="user">Исполнитель
                                                     <span class="text-danger">*</span>
                                                 </label>
-                                                <div class="col-lg-9">
+                                                <div id="usersSelect" class="col-lg-9">
                                                     <select class="default-select form-control wide mb-3" name="user_id"
                                                         id="user">
                                                         @if ($objectId->user_id == '')
@@ -119,7 +119,7 @@
                                                     for="descriptionObject">Примечание</label>
                                                 <div class="col-lg-9">
                                                     <textarea class="form-control" id="descriptionObject" name="description" rows="5"
-                                                        placeholder="Комментарий к объекту..">{{ $objectId->description }}</textarea>
+                                                        placeholder="Комментарий к разделу..">{{ $objectId->description }}</textarea>
                                                 </div>
                                             </div>
                                             <input name="object_id" value="{{ $objectId->object_id }}" hidden>
@@ -143,12 +143,9 @@
     <script src="{{ asset('assets/js/daterangepicker.js') }}"></script>
     <!-- Pickdate init-->
     <script src="{{ asset('assets/js/bs-daterange-picker-init.js') }}"></script>
-    {{-- <script>
-    $(function(){
-        $('#project_sum').attr('value',function() {
-            var projectSum = $(this).val();
-             $("#project_sum").val(Intl.NumberFormat('ru').format(projectSum));
-        });
-    });
-</script> --}}
+    <script>
+        var usersParts = @json($usersParts);
+        var value = $('#parts').val();
+    </script>
+    <script src="{{ asset('assets/js/bindSelectUsersByParts.js') }}"></script>
 @endpush
