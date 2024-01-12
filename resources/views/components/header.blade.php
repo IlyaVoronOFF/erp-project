@@ -3,9 +3,9 @@
         ***********************************-->
       <div class="nav-header">
           <a href="/" class="brand-logo">
-              <img src="{{ asset('assets/images/afblogo1.png') }}" class="logo-img" width="50" height="50"
+              <img src="{{ asset('assets/images/logotip.png') }}" class="logo-img" width="50" height="50"
                   alt="logo">
-              <span class="brand-title" width="123" height="68">АФБ</span>
+              <span class="brand-title" width="123" height="68">ERP</span>
           </a>
           <div class="nav-control">
               <div class="hamburger">

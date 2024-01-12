@@ -24,9 +24,9 @@ class UsersSeeder extends Seeder
 
         $data = [
             [
-                'fio' => 'Сергей Акимов',
-                'email' => 'director@afb33.ru',
-                'phone' => '+7 920 628 00 13',
+                'fio' => 'Директор Директор',
+                'email' => 'director@mail.ru',
+                'phone' => '+7 900 111-11-11',
                 'password' => bcrypt('123123'),
                 'num_pass' => '123123',
                 'rule_id' => 1,
@@ -37,7 +37,7 @@ class UsersSeeder extends Seeder
             ],
             [
                 'fio' => 'Админ Админ',
-                'email' => 'admin@afb33.ru',
+                'email' => 'admin@mail.ru',
                 'phone' => $faker->numerify('+7 ### ### ## ##'),
                 'password' => bcrypt('111222'),
                 'num_pass' => '111222',

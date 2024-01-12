@@ -61,7 +61,7 @@
                   @endif
               </ul>
               <div class="copyright">
-                  <p><strong>ООО "АФБ-БАУПРОЕКТ"</strong> © 2008 - <?= date('Y') ?><br>Все права защищены<br>версия
+                  <p><strong>ERP-project</strong> © 2020 - <?= date('Y') ?><br>Все права защищены<br>версия
                       1.1.2
                   </p>
               </div>
