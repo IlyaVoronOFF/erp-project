@@ -49,6 +49,7 @@
                                             <strong>Проект выполнен на</strong>
                                             <div class="progress" style="background: rgba(127, 99, 244, .1);width:30%">
                                                 <div @if ($progress > 100) class="progress-bar bg-danger"
+                                                @elseif ($progress == 100) class="progress-bar bg-success"
                                                 @else
                                                     class="progress-bar bg-primary" @endif
                                                     style="width: {{ $progress }}%;" role="progressbar">
@@ -57,6 +58,7 @@
                                             </div>
                                             <span
                                                 @if ($progress > 100) class="badge badge-danger"
+                                                @elseif ($progress == 100) class="badge badge-success"
                                                 @else
                                                     class="badge badge-primary" @endif>{{ $progress }}
                                                 %</span>
@@ -82,13 +84,16 @@
                                             <span>Планируемая ФОТ</span>
                                         </div>
                                         <div class="col-3 pt-3 pb-3 border-end">
-                                            <h3 class="mb-1 text-primary">
-                                                @php
-                                                    $arr = [];
-                                                    foreach ($objPartsList as $i) {
-                                                        $arr[] = $i->fot_part;
-                                                    }
-                                                @endphp
+                                            @php
+                                                $arr = [];
+                                                foreach ($objPartsList as $i) {
+                                                    $arr[] = $i->fot_part;
+                                                }
+                                            @endphp
+                                            <h3
+                                                class="mb-1 @if (array_sum($arr) <= $objectId->plan_fot) text-success
+                                                @else
+                                                text-danger @endif">
                                                 {{ number_format(array_sum($arr), 0, '', ' ') }} ₽
                                             </h3>
                                             <span>Фактическая ФОТ</span>
@@ -134,7 +139,9 @@
                                     <tr class="table-primary">
                                         <th style="max-width: 40px">#</th>
                                         <th style="text-align: left;">Раздел</th>
-                                        <th>Исполнитель</th>
+                                        @if (auth()->user()->rule_id < 5)
+                                            <th>Исполнитель</th>
+                                        @endif
                                         <th>Начало</th>
                                         <th>Окончание</th>
                                         <th>Норма часов</th>
@@ -181,7 +188,6 @@
                                                         <a href="{{ route('pages.part-user.index', ['object' => $objectId->id, 'part' => $i->id]) }}"
                                                             class="text-primary"><strong>{{ $i->part }}</strong></a>
                                                     </td>
-                                                    <td>{{ $i->user }}</td>
                                                     <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                     <td>{{ substr($i->daterange, 13, 23) }}</td>
                                                     <td>{{ $i->time }}</td>

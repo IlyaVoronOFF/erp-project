@@ -56,15 +56,14 @@
                                 <thead class="thead-primary">
                                     <tr>
                                         <th>#</th>
-                                        <th style="min-width: 100px">Шифр</th>
+                                        <th style="min-width: 80px">Шифр</th>
                                         <th style="min-width: 300px;text-align: left;">Наименование</th>
                                         <th>Статус</th>
-                                        <th>Рук. проекта</th>
+                                        <th>Руководитель</th>
                                         <th>Дата начала</th>
                                         <th>Дата окончания</th>
-                                        <th>Стадии</th>
                                         @if (auth()->user()->rule_id < 5)
-                                            <th>Стоимость проекта</th>
+                                            <th>Стоимость</th>
                                         @endif
                                         {{-- <th>Выплач. ФОТ (руб)</th>
                                         <th>Выплач. ФОТ (%)</th> --}}
@@ -85,20 +84,21 @@
                                                         class="text-primary"><strong>{{ $i->title }}</strong></a>
                                                 </td>
                                                 <td style="min-width: 111px;">
+                                                    @if ($i->archive == 0)
+                                                        <div class="status-btn" style="background-color:#68d5ff !important">
+                                                            {{ 'Новый' }}</div>
+                                                    @endif
                                                     @foreach ($setStatuses as $s)
                                                         @if ($i->archive == $s->id)
                                                             <div class="status-btn"
                                                                 style="background-color:{{ $s->color }}!important">
                                                                 {{ $s->name }}</div>
-                                                        @elseif($i->archive == 0)
-                                                            {{ '-' }}
                                                         @endif
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $i->fio }}</td>
                                                 <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                 <td>{{ substr($i->daterange, 13, 23) }}</td>
-                                                <td>{{ $i->stage_name }}</td>
                                                 <td><strong>{{ number_format($i->project_sum, 0, '', ' ') }} ₽</strong>
                                                 </td>
                                                 {{-- <td></td>
@@ -125,6 +125,7 @@
                                                     @endphp
                                                     <span
                                                         @if ($progress > 100) class="badge badge-danger"
+                                                        @elseif ($progress == 100) class="badge badge-success"
                                                 @else
                                                     class="badge badge-primary" @endif>
                                                         {{ $progress }} %
@@ -168,7 +169,6 @@
                                                     <td>{{ $i->fio }}</td>
                                                     <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                     <td>{{ substr($i->daterange, 13, 23) }}</td>
-                                                    <td>{{ $i->stage_name }}</td>
                                                     <td><strong>{{ number_format($i->project_sum, 0, '', ' ') }}
                                                             ₽</strong>
                                                     </td>
@@ -196,6 +196,7 @@
                                                         @endphp
                                                         <span
                                                             @if ($progress > 100) class="badge badge-danger"
+                                                            @elseif ($progress == 100) class="badge badge-success"
                                                 @else
                                                     class="badge badge-primary" @endif>
                                                             {{ $progress }} %
@@ -241,7 +242,6 @@
                                                         <td>{{ $i->fio }}</td>
                                                         <td>{{ substr($i->daterange, 0, 10) }}</td>
                                                         <td>{{ substr($i->daterange, 13, 23) }}</td>
-                                                        <td>{{ $i->stage_name }}</td>
                                                         {{-- <td></td>
                                             <td><span class="badge badge-primary light">70%</span></td> --}}
                                                         <td>
@@ -266,6 +266,7 @@
                                                             @endphp
                                                             <span
                                                                 @if ($progress > 100) class="badge badge-danger"
+                                                                @elseif ($progress == 100) class="badge badge-success"
                                                 @else
                                                     class="badge badge-primary" @endif>
                                                                 {{ $progress }} %
