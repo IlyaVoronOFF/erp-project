@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -12,7 +11,7 @@
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">Ваш email<span
                                         class="text-danger">*</span></label>
 
@@ -57,6 +56,25 @@
                                         </label>
                                     </div>
                                 </div>
+                            </div> --}}
+
+                            <div class="row mb-3">
+                                <label for="email" class="col-md-4 col-form-label text-md-end"
+                                    style="margin-top: 10px;">Войти как <span class="text-danger">*</span></label>
+
+                                <div class="col-md-7">
+                                    <select class="default-select form-control wide mb-3" name="email" id="email"
+                                        required autofocus>
+                                        <option value="0" selected disabled>
+                                            {{ 'Выберите роль..' }}</option>
+                                        <option value="admin@mail.ru">Администратор</option>
+                                        <option value="osa@mail.ru">Руководитель 1</option>
+                                        <option value="aileron@mail.ru">Руководитель 2</option>
+                                        <option value="ss@mail.ru">Исполнитель 1</option>
+                                        <option value="evg@mail.ru">Исполнитель 2</option>
+                                    </select>
+                                    <input id="password" name="password" value="" hidden>
+                                </div>
                             </div>
 
                             <div class="row mb-0">
@@ -79,3 +97,26 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $('#email').change(function() {
+            switch ($(this).val()) {
+                case 'admin@mail.ru':
+                    $('#password').val('111222');
+                    break;
+                case 'osa@mail.ru':
+                    $('#password').val('memory');
+                    break;
+                case 'ss@mail.ru':
+                    $('#password').val('123456');
+                    break;
+                case 'aileron@mail.ru':
+                    $('#password').val('123456');
+                    break;
+                case 'evg@mail.ru':
+                    $('#password').val('123456');
+                    break;
+            }
+        });
+    </script>
+@endpush

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ObjectFilter;
-use App\Http\Requests\objectstore;
+use App\Http\Requests\ObjectsStore;
 use App\Http\Requests\objectsupdate;
 use App\Models\ObjectModel;
 use App\Models\ObjectParts;
@@ -35,13 +35,14 @@ class ObjectsController extends Controller
                 ->join('stages', 'objects.stage_id', '=', 'stages.id')
                 ->join('users', 'objects.user_id', '=', 'users.id')
                 ->select('objects.*', DB::raw('stages.short_name as stage_name'), DB::raw('users.fio as fio'))
-                ->where('archive', '>', 1)
+                ->where('archive', '!=', 1)
                 ->get();
         }
 
         $partsUser = ObjectParts::select('object_parts.*')
             ->where('object_parts.user_id', auth()->user()->id)
-            ->get();
+            ->get()
+            ->unique('object_id');
         //return $partsUser;
 
         $parts = ObjectParts::select('object_parts.object_id')
@@ -104,7 +105,7 @@ class ObjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(objectstore $request, ObjectModel $object)
+    public function store(ObjectsStore $request, ObjectModel $object)
     {
         $data = $request->only(['id', 'title', 'code', 'daterange', 'user_id', 'stage_id', 'project_sum', 'plan_fot', 'address', 'description']);
         $status = $object->fill($data)->save();

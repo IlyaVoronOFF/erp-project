@@ -22,14 +22,14 @@ class RulesSeeder extends Seeder
 
         $data = [
             [
-                'id' => 2,
-                'name' => 'Администратор',
+                'id' => 1,
+                'name' => 'Директор',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => 1,
-                'name' => 'Директор',
+                'id' => 2,
+                'name' => 'Администратор',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
